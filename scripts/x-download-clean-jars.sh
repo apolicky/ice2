@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+# set -e
 
 LIBS_DIR="/app/libs" # points to the directory mounted in docker compose
 mkdir -p "$LIBS_DIR"
