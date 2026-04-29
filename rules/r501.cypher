@@ -1,0 +1,3 @@
+// R501 are there even any RBCACs
+MATCH p = ()-[r:AGGREGATED_REFERENCE_COMPARISON_HOLDS]->()
+RETURN p

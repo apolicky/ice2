@@ -1,0 +1,47 @@
+services:
+  neo4j:
+    image: neo4j:2026.03.1-community-ubi9
+    volumes:
+      - ./neo/data:/data
+    environment:
+      - NEO4J_AUTH=neo4j/your_password
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    restart: always
+
+  setup-libs:
+    image: curlimages/curl:8.19.0
+    volumes:
+      - ./libs:/app/libs
+      - ./scripts:/app/scripts:ro
+    entrypoint: ["/bin/sh", "/app/scripts/x-download-clean-jars.sh"]
+    restart: "no"
+
+  setup-inputs:
+    image: curlimages/curl:8.19.0
+    volumes:
+      - ./inputs:/app/inputs
+      - ./scripts:/app/scripts:ro
+    entrypoint: ["/bin/sh", "/app/scripts/x-download-synth-data.sh"]
+    restart: "no"
+
+  ice:
+    build: .
+    volumes:
+      - ./libs:/app/libs
+      - ./src:/app/src:ro
+      - ./inputs:/app/inputs:ro
+    depends_on:
+      - setup-libs
+      - setup-inputs
+      - neo4j
+    mem_limit: 8g
+    environment:
+      - SPRING_NEO4J_URI=bolt://neo4j:7687
+      - SPRING_NEO4J_AUTHENTICATION_USERNAME=neo4j
+      - SPRING_NEO4J_AUTHENTICATION_PASSWORD=your_password
+      - ICE_DATETIMEFORMAT="yyyy-MM-dd'T'HH:mm:ss"
+      - JAVA_OPTS=-Xms3g -Xmx6g
+    ports:
+      - "8080:8080"

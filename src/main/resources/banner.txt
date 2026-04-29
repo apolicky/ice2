@@ -1,0 +1,3 @@
+------------------------------------------------------------
+🚀 Open your browser: http://localhost:${server.port:8080}${server.servlet.context-path:}/swagger-ui/index.html
+------------------------------------------------------------
