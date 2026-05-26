@@ -9,6 +9,8 @@ Tool for extracting business rules and integrity constraints (PoC for diploma th
 ```shell
 git clone 'git@github.com:apolicky/ice2.git'
 cd ice2
+# check that both shell scripts (*.sh) in the `scripts` folder are checked out with `LF` as the EoLine sequence
+docker compose up setup-inputs setup-libs
 docker compose up
 ```
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# set -e
+set -e
 
 INPUTS_DIR="/app/inputs" # points to the directory mounted in docker compose
 mkdir -p "$INPUTS_DIR"
