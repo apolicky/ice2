@@ -1,10 +1,10 @@
 #!/bin/sh
-# set -e
+set -e
 
 LIBS_DIR="/app/libs" # points to the directory mounted in docker compose
 mkdir -p "$LIBS_DIR"
 
-RELEASE_URL="https://github.com/apolicky/ice2/releases/tag/v0.0.0"
+RELEASE_URL="https://github.com/apolicky/ice2/releases/download/v0.0.0"
 LIBS="HyFD-1.2-SNAPSHOT-clean.jar SPIDER-1.2-SNAPSHOT-clean.jar"
 
 # If libs dir is empty, download JARs
